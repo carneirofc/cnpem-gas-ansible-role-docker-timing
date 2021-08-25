@@ -1,0 +1,31 @@
+---
+gas_docker_timing_settings_defaults: &gas_docker_timing_settings_defaults
+  SINAP_TIMING_AREA_PREFIX: ""
+  SINAP_TIMING_DEVICE_PREFIX: ""
+  SINAP_TIMING_INSTANCE: ""
+  SINAP_TIMING_IP: ""
+  SINAP_TIMING_PORT: ""
+  SINAP_TIMING_TELNET_PORT: ""
+  SINAP_TIMING_AREA_PREFIX: ""
+  SINAP_TIMING_AUTOSAVE_CONTAINER_DIR: "/opt/epics/startup/ioc/sinap-timing-epics-ioc/iocBoot/ioctiming/autosave"
+  SINAP_TIMING_AUTOSAVE_DIR: ""
+  SINAP_TIMING_CONTAINER_NAME: "sinap-timing-epics-ioc"
+  SINAP_TIMING_DEVICE_PREFIX: ""
+  SINAP_TIMING_IMAGE_BASE: "dockerregistry.lnls-sirius.com.br/gas/sinap-timing-epics-ioc"
+  SINAP_TIMING_IMAGE_TAG: ""
+  SINAP_TIMING_INSTANCE: "timing-Example"
+  SINAP_TIMING_IP: ""
+  SINAP_TIMING_LOGGING_SERVER_HOST: "10.128.255.3"
+  SINAP_TIMING_LOGGING_SERVER_PORT: "7013"
+  SINAP_TIMING_PORT: ""
+  SINAP_TIMING_TELNET_PORT: ""
+  SINAP_TIMING_PLACEMENT:
+    CONSTRAINTS:
+      - node.hostname != CA-RaCtrl-CO-Srv-1
+      - node.hostname != LA-RaCtrl-CO-Srv-1
+      - node.hostname != TA-TiRack-CO-FWSrv-1
+  STACK_NAME: ""
+
+gas_docker_timing_settings:
+  # AR Amplifier
+  - <<: *gas_docker_timing_settings_defaults

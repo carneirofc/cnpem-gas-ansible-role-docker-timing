@@ -1,0 +1,10 @@
+---
+skip_list:
+  - '602'
+  - no-handler
+  - role-name
+  - unnamed-task
+  - 'var-naming' # var-naming File defines variable that violates variable naming standards
+
+warn_list:
+  - internal-error

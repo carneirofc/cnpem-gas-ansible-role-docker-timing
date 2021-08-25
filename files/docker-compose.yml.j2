@@ -1,0 +1,49 @@
+version: "3.4"
+x-defaults: &defaults
+  logging:
+    driver: "json-file"
+    options:
+      max-size: "{{ gas_docker_timing_logging_max_size }}"
+      max-file: "{{ gas_docker_timing_logging_max_file }}"
+  networks:
+    - hostnet
+
+x-deploy: &deploy
+  replicas: 1
+  restart_policy:
+    condition: any
+
+networks:
+  hostnet:
+    external:
+      name: "host"
+
+services:
+  {{ item.SINAP_TIMING_CONTAINER_NAME }}:
+    <<: *defaults
+    image: {{ item.SINAP_TIMING_IMAGE_BASE }}:{{ item.SINAP_TIMING_IMAGE_TAG }}
+    container_name: {{ item.SINAP_TIMING_CONTAINER_NAME }}-{{ item.SINAP_TIMING_INSTANCE }}
+    command: [
+        '-t', '{{ item.SINAP_TIMING_TELNET_PORT }}',
+        '-i', '{{ item.SINAP_TIMING_IP }}',
+        '-p', '{{ item.SINAP_TIMING_PORT }}',
+        '-d', '{{ item.SINAP_TIMING_INSTANCE }}',
+        '-P', '{{ item.SINAP_TIMING_AREA_PREFIX }}',
+        '-R', '{{ item.SINAP_TIMING_DEVICE_PREFIX }}',
+    ]
+    volumes:
+      - type: bind
+        source: {{ item.SINAP_TIMING_AUTOSAVE_DIR }}
+        target: {{ item.SINAP_TIMING_AUTOSAVE_CONTAINER_DIR }}
+
+    deploy:
+      <<: *deploy
+{% if item.SINAP_TIMING_PLACEMENT is defined %}
+      placement:
+  {% if item.SINAP_TIMING_PLACEMENT.CONSTRAINTS is defined and item.SINAP_TIMING_PLACEMENT.CONSTRAINTS | length %}
+      constraints:
+    {% for item in item.SINAP_TIMING_PLACEMENT.CONSTRAINTS %}
+      - {{ item }}
+    {% endfor %}
+  {% endif %}
+{% endif %}
