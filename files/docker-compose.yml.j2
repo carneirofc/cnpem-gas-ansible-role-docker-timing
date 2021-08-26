@@ -40,10 +40,10 @@ services:
       <<: *deploy
 {% if item.SINAP_TIMING_PLACEMENT is defined %}
       placement:
-  {% if item.SINAP_TIMING_PLACEMENT.CONSTRAINTS is defined and item.SINAP_TIMING_PLACEMENT.CONSTRAINTS | length %}
+{%   if item.SINAP_TIMING_PLACEMENT.CONSTRAINTS is defined and item.SINAP_TIMING_PLACEMENT.CONSTRAINTS | length %}
       constraints:
-    {% for item in item.SINAP_TIMING_PLACEMENT.CONSTRAINTS %}
+{%     for item in item.SINAP_TIMING_PLACEMENT.CONSTRAINTS %}
       - {{ item }}
-    {% endfor %}
-  {% endif %}
+{%     endfor %}
+{%   endif %}
 {% endif %}
