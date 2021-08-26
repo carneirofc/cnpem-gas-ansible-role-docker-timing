@@ -1,4 +1,5 @@
 ---
 gas_docker_timing_base_template_dir: ~/templates
-gas_docker_timing_logging_max_size: "10m"
+gas_docker_timing_compose_file_version: "3.4"
 gas_docker_timing_logging_max_file: "10"
+gas_docker_timing_logging_max_size: "10m"
