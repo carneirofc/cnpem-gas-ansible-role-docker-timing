@@ -41,9 +41,9 @@ services:
 {% if item.SINAP_TIMING_PLACEMENT is defined %}
       placement:
 {%   if item.SINAP_TIMING_PLACEMENT.CONSTRAINTS is defined and item.SINAP_TIMING_PLACEMENT.CONSTRAINTS | length %}
-      constraints:
+        constraints:
 {%     for item in item.SINAP_TIMING_PLACEMENT.CONSTRAINTS %}
-      - {{ item }}
+          - {{ item }}
 {%     endfor %}
 {%   endif %}
 {% endif %}
